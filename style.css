@@ -25,3 +25,17 @@ button.danger { background: #b00020; width: auto; margin: 0; }
 .thumb span { display: block; margin-top: 4px; font-size: 14px; color: #555; }
 .btn.small { padding: 6px 10px; font-size: 14px; margin-top: 4px; color: #fff; }
 #dlAll { width: auto; margin: 0; }
+.pager { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; }
+.btn.small.off { background: #c5ccd6; pointer-events: none; }
+select { width: 100%; padding: 10px; margin: 6px 0; font-size: 16px; }
+.filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
+.rename { display: flex; gap: 8px; }
+.rename input, .rename button { margin: 0; }
+.rename button { width: auto; }
+.addbox { margin: 12px 0; padding: 12px; border: 1px dashed #c5ccd6; border-radius: 8px; }
+.tools { display: flex; gap: 4px; justify-content: center; margin-top: 4px; }
+.tools form { margin: 0; }
+.tools button { width: auto; margin: 0; padding: 4px 10px; font-size: 14px; }
+.tools button:disabled { opacity: .35; cursor: default; }
+.flash { padding: 10px; border-radius: 6px; margin: 0 0 8px; background: #e6f4ea; color: #14532d; }
+.flash.err { background: #fde8ea; color: #b00020; }

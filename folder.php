@@ -17,7 +17,11 @@ $stmt->execute([$id]);
 $pages = $stmt->fetchAll();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'delete') {
-    foreach ($pages as $p) @unlink(UPLOAD_DIR . '/' . $p['file_path']);
+    foreach ($pages as $p) {
+        @unlink(UPLOAD_DIR . '/' . $p['file_path']);
+        @unlink(UPLOAD_DIR . '/' . thumb_rel($p['file_path']));
+    }
+    @rmdir(UPLOAD_DIR . '/' . $id . '/thumbs');
     @rmdir(UPLOAD_DIR . '/' . $id);
     $pdo->prepare("DELETE FROM folders WHERE id = ?")->execute([$id]);
     header('Location: index.php');
@@ -57,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'delet
     <?php foreach ($pages as $p): ?>
         <div class="thumb">
         <a href="image.php?id=<?= (int)$p['id'] ?>" target="_blank">
-            <img src="image.php?id=<?= (int)$p['id'] ?>" alt="Page <?= (int)$p['page_no'] ?>" loading="lazy">
+            <img src="image.php?id=<?= (int)$p['id'] ?>&thumb=1" alt="Page <?= (int)$p['page_no'] ?>" loading="lazy">
         </a>
         <span>Page <?= (int)$p['page_no'] ?></span>
         <a class="btn small dl" href="download.php?id=<?= (int)$p['id'] ?>">Download</a>
