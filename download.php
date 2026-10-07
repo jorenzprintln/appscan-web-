@@ -5,7 +5,7 @@ require_login();
 
 // download.php?id=PAGE_ID
 $stmt = $pdo->prepare(
-    "SELECT p.file_path, f.name
+    "SELECT p.file_path, p.page_no, f.name
      FROM pages p JOIN folders f ON f.id = p.folder_id
      WHERE p.id = ?"
 );
@@ -21,7 +21,7 @@ if (!$path || strpos($path, $base) !== 0) {
 
 $safe = preg_replace('/[^A-Za-z0-9._ -]/', '_', $row['name']);
 $ext  = pathinfo($path, PATHINFO_EXTENSION);
-$num  = pathinfo($path, PATHINFO_FILENAME);
+$num  = sprintf('%03d', $row['page_no']);
 
 header('Content-Type: ' . mime_content_type($path));
 header('Content-Disposition: attachment; filename="' . $safe . '_' . $num . '.' . $ext . '"');

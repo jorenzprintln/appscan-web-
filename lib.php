@@ -250,3 +250,12 @@ function delete_folder(PDO $pdo, int $folderId): void {
     @rmdir(UPLOAD_DIR . '/' . $folderId . '/thumbs');
     @rmdir(UPLOAD_DIR . '/' . $folderId);
 }
+function set_folder_done(PDO $pdo, int $folderId, int $userId, bool $done): void {
+    if ($done) {
+        $pdo->prepare("UPDATE folders SET done_at = NOW(), done_by = ? WHERE id = ?")
+            ->execute([$userId, $folderId]);
+    } else {
+        $pdo->prepare("UPDATE folders SET done_at = NULL, done_by = NULL WHERE id = ?")
+            ->execute([$folderId]);
+    }
+}

@@ -2,7 +2,7 @@
 require __DIR__ . '/db.php';
 
 $users = [
-    ['pj_pablo.msp@leytenet.com',   'Paul Jorenz Pablo',    'Yeswecan123!'],
+    ['loreca@gmail.com',   'Loreca',    '12345!'],
 ];
 
 $stmt = $pdo->prepare(
